@@ -49,7 +49,7 @@ public:
         }
     };
 
-    void start(const QString &program, const QStringList &arguments = {}, QIODeviceBase::OpenMode mode = ReadWrite) {
+    void start(const QString &program, const QStringList &arguments = {}, OpenMode mode = ReadWrite) {
         if(logging) {
             log.write(program);
             for(int i=0 ; i < arguments.length() ; i++) {
