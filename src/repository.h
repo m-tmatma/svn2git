@@ -51,9 +51,9 @@ public:
 
     void start(const QString &program, const QStringList &arguments = {}, OpenMode mode = ReadWrite) {
         if(logging) {
-            log.write(program.data());
+            log.write((const char *)program.data());
             for(int i=0 ; i < arguments.length() ; i++) {
-                log.write(arguments.at(i).data());
+                log.write((const char *)arguments.at(i).data());
             }
         }
         QProcess::start(program, arguments, ReadWrite);
