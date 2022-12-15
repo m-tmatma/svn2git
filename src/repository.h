@@ -49,6 +49,10 @@ public:
         }
     };
 
+    void start(const QString &program, const QStringList &arguments = {}, QIODeviceBase::OpenMode mode = ReadWrite) {
+        QProcess::start(program, arguments, ReadWrite);
+    }
+
     qint64 write(const char *data) {
         Q_ASSERT(state() == QProcess::Running);
         if(logging) {
