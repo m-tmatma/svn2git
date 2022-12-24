@@ -10,3 +10,6 @@
 [submodule "test/libs/bats-file"]
 	path = test/libs/bats-file
 	url = https://github.com/tralston/bats-file
+[submodule "ttssh2migrate"]
+	path = ttssh2migrate
+	url = https://github.com/m-tmatma/ttssh2migrate.git
