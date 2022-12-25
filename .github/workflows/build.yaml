@@ -33,7 +33,7 @@ jobs:
             build-essential \
             libapr1-dev \
             libsvn-dev \
-            qtchooser \
+            qt6-base-dev \
             libqt6core6
 
       - name: 'Checkout Git branch'
