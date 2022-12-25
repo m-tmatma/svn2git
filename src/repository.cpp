@@ -129,7 +129,7 @@ private:
     QSet<QString> resetBranchNames;
 
   /* Optional filter to fix up log messages */
-    QProcess filterMsg;
+    ConsoleLogQProcess filterMsg;
     QByteArray msgFilter(QByteArray);
 
     /* starts at 0, and counts up.  */
@@ -329,7 +329,7 @@ FastImportRepository::FastImportRepository(const Rules::Repository &rule)
     }
 
     // create the defaultBranch from the config
-    QProcess config;
+    ConsoleLogQProcess config;
     config.start("git", QStringList() << "config" << "init.defaultBranch");
     config.waitForFinished(-1);
     defaultBranch = QString(config.readAllStandardOutput()).trimmed();
@@ -346,11 +346,11 @@ FastImportRepository::FastImportRepository(const Rules::Repository &rule)
         if (!QDir(name).exists()) { // repo doesn't exist yet.
             qDebug() << "Creating new repository" << name;
             QDir::current().mkpath(name);
-            QProcess init;
+            ConsoleLogQProcess init;
             init.setWorkingDirectory(name);
             init.start("git", QStringList() << "--bare" << "init");
             init.waitForFinished(-1);
-            QProcess casesensitive;
+            ConsoleLogQProcess casesensitive;
             casesensitive.setWorkingDirectory(name);
             casesensitive.start("git", QStringList() << "config" << "core.ignorecase" << "false");
             casesensitive.waitForFinished(-1);
