@@ -33,9 +33,7 @@ jobs:
             build-essential \
             libapr1-dev \
             libsvn-dev \
-            qt6-base-dev \
-            qt6-base-dev-tools \
-            libqt6core6
+            qt5-default
 
       - name: 'Checkout Git branch'
         uses: actions/checkout@v2
