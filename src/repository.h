@@ -26,12 +26,31 @@
 #include "ruleparser.h"
 #include "CommandLineParser.h"
 
-class LoggingQProcess : public QProcess
+class ConsoleLogQProcess : public QProcess
+{
+public:
+    void start(const QString &program, const QStringList &arguments, OpenMode mode = ReadWrite)
+    {
+        QProcess::start(program, arguments, mode);
+    }
+#if !defined(QT_NO_PROCESS_COMBINED_ARGUMENT_START)
+    void start(const QString &command, OpenMode mode = ReadWrite)
+    {
+        QProcess::start(command, mode);
+    }
+#endif
+    void start(OpenMode mode = ReadWrite)
+    {
+        QProcess::start(mode);
+    }
+};
+
+class LoggingQProcess : public ConsoleLogQProcess
 {
     QFile log;
     bool logging;
 public:
-    LoggingQProcess(const QString filename) : QProcess(), log() {
+    LoggingQProcess(const QString filename) : ConsoleLogQProcess(), log() {
         if(CommandLineParser::instance()->contains("debug-rules")) {
             logging = true;
             QString name = filename;
