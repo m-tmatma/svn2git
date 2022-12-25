@@ -31,11 +31,18 @@ class ConsoleLogQProcess : public QProcess
 public:
     void start(const QString &program, const QStringList &arguments, OpenMode mode = ReadWrite)
     {
+        fprintf(stdout, "%s", qPrintable(program));
+        for ( const auto& i : arguments )
+        {
+            fprintf(stdout, " %s", qPrintable(i));
+        }
+        fprintf(stdout, "\n");
         QProcess::start(program, arguments, mode);
     }
 #if !defined(QT_NO_PROCESS_COMBINED_ARGUMENT_START)
     void start(const QString &command, OpenMode mode = ReadWrite)
     {
+        fprintf(stdout, "%s\n", qPrintable(command));
         QProcess::start(command, mode);
     }
 #endif
