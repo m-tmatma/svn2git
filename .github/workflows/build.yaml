@@ -34,6 +34,7 @@ jobs:
             libapr1-dev \
             libsvn-dev \
             qt6-base-dev \
+            qt6-base-dev-tools \
             libqt6core6
 
       - name: 'Checkout Git branch'
