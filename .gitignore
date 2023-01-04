@@ -5,3 +5,5 @@ svn-all-fast-export
 svn-all-fast-export.exe
 src/local-config.pri
 /build/
+.qmake.stash
+
