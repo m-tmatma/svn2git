@@ -913,6 +913,9 @@ void FastImportRepository::startFastImport()
             fastImport.start("cat", QStringList());
         }
         fastImport.waitForStarted(-1);
+        fastImport.writeLog("waitForStarted");
+        fastImport.waitForFinished (60 * 1000);
+        fastImport.writeLog("waitForFinished");
 
         reloadBranches();
     }

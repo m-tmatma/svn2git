@@ -79,6 +79,12 @@ public:
         }
     };
 
+    void writeLog(const char *data) {
+        if(logging) {
+            log.write(data);
+        }
+    }
+
     qint64 write(const char *data) {
         Q_ASSERT(state() == QProcess::Running);
         if(logging) {
