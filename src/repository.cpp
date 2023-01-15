@@ -25,6 +25,7 @@
 #include <QFile>
 #include <QLinkedList>
 #include <time.h>
+#include <unistd.h>
 
 static const int maxSimultaneousProcesses = 100;
 
@@ -753,6 +754,7 @@ Repository::Transaction *FastImportRepository::newTransaction(const QString &bra
         startFastImport();
         // write everything to disk every 10000 commits
         fastImport.write("checkpoint\n");
+        usleep(100 * 1000);
         qDebug() << "checkpoint!, marks file truncated";
     }
     outstandingTransactions++;
