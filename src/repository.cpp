@@ -1173,6 +1173,14 @@ int FastImportRepository::Transaction::commit()
     s.append("committer " + author + " " + QString::number(datetime).toUtf8() + " " + timezone + "\n");
     s.append("data " + QString::number(message.length()) + "\n");
     s.append(message + "\n");
+
+    QFile svn2marks("svn2marks.log");
+    if (svn2marks.open(QIODevice::Append)){
+        QTextStream out(&svn2marks);
+        out << mark << "," << revnum << endl;
+        svn2marks.close();
+    }
+
     repository->fastImport.write(s);
 
     // note some of the inferred merges
