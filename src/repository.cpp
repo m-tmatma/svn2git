@@ -1174,9 +1174,17 @@ int FastImportRepository::Transaction::commit()
     s.append("data " + QString::number(message.length()) + "\n");
     s.append(message + "\n");
 
-    QFile svn2marks("svn2marks.log");
+    QString filePath = "svn2marks.csv";
+    QFile svn2marks(filePath);
+    bool isAddHeader = true;
+    if (QFile::exists(filePath) ) {
+        isAddHeader =  false;
+    }
     if (svn2marks.open(QIODevice::Append)){
         QTextStream out(&svn2marks);
+        if (isAddHeader) {
+            out << "mark" << "," << "revnum" << endl;
+        }
         out << mark << "," << revnum << endl;
         svn2marks.close();
     }
