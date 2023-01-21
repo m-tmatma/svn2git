@@ -1202,6 +1202,15 @@ int FastImportRepository::Transaction::commit()
         }
     }
 
+    {
+        QString filePath = "fastImport.log";
+        QFile logFastImport(filePath);
+        if (logFastImport.open(QIODevice::Append)){
+            logFastImport.write(s);
+            logFastImport.close();
+        }
+    }
+
     repository->fastImport.write(s);
 
     // note some of the inferred merges
