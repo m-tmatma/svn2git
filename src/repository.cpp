@@ -914,7 +914,7 @@ void FastImportRepository::startFastImport()
             QTextStream out(&logFile);
             out << "fast-import";
             for ( const auto& marksOption : marksOptions  ) {
-                out << marksOption;
+                out <<  " " << marksOption;
             }
             out << endl;
             logFile.close();
