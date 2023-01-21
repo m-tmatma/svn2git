@@ -1183,7 +1183,7 @@ int FastImportRepository::Transaction::commit()
         if (isAddHeader) {
             out << "mark" << "," << "revnum" << endl;
         }
-        out << mark << "," << revnum << endl;
+        out << ":" << mark << "," << revnum << endl;
         svn2marks.close();
     }
 
