@@ -917,7 +917,7 @@ void FastImportRepository::startFastImport()
         fastImport.setStandardOutputFile(logFileName(name), QIODevice::Append);
         fastImport.setProcessChannelMode(QProcess::MergedChannels);
 
-        QString filePath = "git-fast-import-log";
+        QString filePath = "fastImport.log";
         QFile logFile(filePath);
         // check existence before opening file.
         if (logFile.open(QIODevice::Append)){
