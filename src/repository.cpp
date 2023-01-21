@@ -1176,10 +1176,8 @@ int FastImportRepository::Transaction::commit()
 
     QString filePath = "svn2marks.csv";
     QFile svn2marks(filePath);
-    bool isAddHeader = true;
-    if (QFile::exists(filePath) ) {
-        isAddHeader =  false;
-    }
+    // check existence before opening file.
+    bool isAddHeader = QFile::exists(filePath) ? false : true;
     if (svn2marks.open(QIODevice::Append)){
         QTextStream out(&svn2marks);
         if (isAddHeader) {
