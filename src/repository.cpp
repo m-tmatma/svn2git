@@ -752,6 +752,16 @@ Repository::Transaction *FastImportRepository::newTransaction(const QString &bra
     if ((++commitCount % CommandLineParser::instance()->optionArgument(QLatin1String("commit-interval"), QLatin1String("10000")).toInt()) == 0) {
         startFastImport();
         // write everything to disk every 10000 commits
+
+        QString filePath = "git-fast-import-log";
+        QFile logFile(filePath);
+        // check existence before opening file.
+        if (logFile.open(QIODevice::Append)){
+            QTextStream out(&logFile);
+            out << "checkpoint" << endl;
+            logFile.close();
+        }
+
         fastImport.write("checkpoint\n");
         qDebug() << "checkpoint!, marks file truncated";
     }
