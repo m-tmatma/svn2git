@@ -907,6 +907,19 @@ void FastImportRepository::startFastImport()
         fastImport.setStandardOutputFile(logFileName(name), QIODevice::Append);
         fastImport.setProcessChannelMode(QProcess::MergedChannels);
 
+        QString filePath = "git-fast-import-log";
+        QFile logFile(filePath);
+        // check existence before opening file.
+        if (logFile.open(QIODevice::Append)){
+            QTextStream out(&logFile);
+            out << "fast-import";
+            for ( const auto& marksOption : marksOptions  ) {
+                out << marksOption;
+            }
+            out << endl;
+            logFile.close();
+        }
+
         if (!CommandLineParser::instance()->contains("dry-run") && !CommandLineParser::instance()->contains("create-dump")) {
             fastImport.start("git", QStringList() << "fast-import" << marksOptions);
         } else {
