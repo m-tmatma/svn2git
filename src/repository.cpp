@@ -753,7 +753,7 @@ Repository::Transaction *FastImportRepository::newTransaction(const QString &bra
         startFastImport();
         // write everything to disk every 10000 commits
 
-        QString filePath = "git-fast-import-log";
+        QString filePath = "fastImport.log";
         QFile logFile(filePath);
         // check existence before opening file.
         if (logFile.open(QIODevice::Append)){
